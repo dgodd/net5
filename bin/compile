@@ -26,14 +26,14 @@ system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapp
 
 Dir.chdir(build_path)
 puts "Restoring packages"
-system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet restore")
+system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet restore'")
 
 puts "Building"
-system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet build")
+system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet build'")
 
 puts "Publishing"
-system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet publish")
+system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet publish'")
 
-puts "Directory Tree"
-puts "BuildPath: #{build_path}"
-system("find #{build_path}")
+# puts "Directory Tree"
+# puts "BuildPath: #{build_path}"
+# system("find #{build_path}")
