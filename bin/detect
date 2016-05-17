@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# vi:syntax=ruby
+
+gemfile_path = File.join ARGV[0], "project.json"
+
+if File.exist?(gemfile_path)
+  puts "aspnet5"
+  exit 0
+else
+  exit 1
+end

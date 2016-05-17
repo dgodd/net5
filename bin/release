@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# vi:syntax=ruby
+
+build_path = ARGV[0]
+
+puts YAML.dump({
+  config_vars: {},
+  default_process_types: {
+    web: "#{build_path}/vendor/dotnet/dotnet run"
+  }
+})
