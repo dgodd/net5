@@ -20,10 +20,11 @@ puts "Installing Dotnet"
 # end
 
 puts "Install libunwind"
-system("curl -LO http://mirrors.kernel.org/ubuntu/pool/main/libu/libunwind/libunwind8_1.1-2.2ubuntu3_amd64.deb")
-system("dpkg -i libunwind8_1.1-2.2ubuntu3_amd64.deb")
-system("curl -LO http://mirrors.kernel.org/ubuntu/pool/main/libu/libunwind/libunwind8-dev_1.1-2.2ubuntu3_amd64.deb")
-system("dpkg -i libunwind8-dev_1.1-2.2ubuntu3_amd64.deb")
+packpath = ENV['PWD']
+Dir.chdir("/") do
+  puts("tar zxvf #{packpath}/libunwind8.tgz")
+  system("tar zxvf #{packpath}/libunwind8.tgz")
+end
 
 puts("#{build_path}/vendor")
 system('mkdir', '-p', "#{build_path}/vendor")
