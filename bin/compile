@@ -1,39 +1,33 @@
-#!/usr/bin/env ruby
-# vi:syntax=ruby
+#!/usr/bin/env bash
+# vi:syntax=bash
+set -ex
+# set -pipefail
 
-#sync output
-$stdout.sync = true
+build_path = $0
+cache_path = $1
 
-build_path = ARGV[0]
-cache_path = ARGV[1]
+echo "Installing Dotnet"
 
-puts "Installing Dotnet"
+echo "Install libunwind && libgettextpo"
+cp /tmp/buildpacks/*/ldconfig_wrapper.sh $build_path/
+mkdir -p $build_path/vendor/libunwind
+pushd $build_path/vendor/libunwind
+  tar zxvf /tmp/buildpacks/*/libunwind.tgz
+popd
 
-puts "Install libunwind && libgettextpo"
-system("cp /tmp/buildpacks/*/ldconfig_wrapper.sh #{build_path}/")
-system("mkdir -p #{build_path}/vendor/libunwind")
-Dir.chdir("#{build_path}/vendor/libunwind") do
-  system("tar zxvf /tmp/buildpacks/*/libunwind.tgz")
+mkdir -p $build_path/vendor/libgettextpo
+pushd $build_path/vendor/libgettextpo
+  tar zxvf /tmp/buildpacks/*/libgettextpo.tgz
 end
-system("mkdir -p #{build_path}/vendor/libgettextpo")
-Dir.chdir("#{build_path}/vendor/libgettextpo") do
-  system("tar zxvf /tmp/buildpacks/*/libgettextpo.tgz")
-end
 
-puts("#{build_path}/vendor")
-system('mkdir', '-p', "#{build_path}/vendor")
-system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir #{build_path}/vendor/dotnet'")
+cd $build_path
+export HOME=$build_path
+source ./ldconfig_wrapper.sh
 
-Dir.chdir(build_path)
-puts "Restoring packages"
-system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet restore'")
+curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir $build_path/vendor/dotnet
 
-puts "Building"
-system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet build'")
+echo "Restoring packages"
+./vendor/dotnet/dotnet restore
 
-puts "Publishing"
-system("bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet publish'")
-
-# puts "Directory Tree"
-# puts "BuildPath: #{build_path}"
-# system("find #{build_path}")
+echo "Building packages"
+./vendor/dotnet/dotnet build
