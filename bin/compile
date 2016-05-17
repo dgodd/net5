@@ -9,7 +9,7 @@ cache_path = ARGV[1]
 
 puts "Installing Dotnet"
 
-system("apt-get install libunwind gettext")
+system("sudo apt-get install libunwind gettext")
 
 puts("#{build_path}/vendor")
 system('mkdir', '-p', "#{build_path}/vendor")
