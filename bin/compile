@@ -18,7 +18,7 @@ popd
 mkdir -p $cache_path/vendor/libgettextpo
 pushd $cache_path/vendor/libgettextpo
   tar zxvf /tmp/buildpacks/*/libgettextpo.tgz
-end
+popd
 
 cd $cache_path
 export HOME=$cache_path
