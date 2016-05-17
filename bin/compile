@@ -21,6 +21,8 @@ puts "Installing Dotnet"
 
 puts "Install libunwind"
 packpath = ENV['PWD']
+system("pwd")
+system("find .")
 Dir.chdir("/") do
   puts("tar zxvf #{packpath}/libunwind8.tgz")
   system("tar zxvf #{packpath}/libunwind8.tgz")
