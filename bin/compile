@@ -27,7 +27,7 @@ Dir.chdir("#{build_path}/vendor/libunwind") do
   system("tar zxvf /tmp/buildpacks/*/libunwind.tgz")
   system("cp /etc/ld.so.conf #{build_path}/ld.so.conf")
   system("echo '#{build_path}/vendor/libunwind' >> #{build_path}/ld.so.conf")
-  system("ldconfig -f #{build_path}/ld.so.conf")
+  system("/sbin/ldconfig -f #{build_path}/ld.so.conf")
 end
 
 puts("#{build_path}/vendor")
