@@ -23,4 +23,7 @@ puts "Publishing"
 system("#{build_path}/vendor/dotnet/dotnet publish")
 
 puts "Directory Tree"
+puts "BuildPath: #{build_path}"
 system("find #{build_path}")
+puts "Directory Tree Vendor"
+system("find #{build_path}/vendor")
