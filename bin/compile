@@ -7,7 +7,9 @@ $stdout.sync = true
 build_path = ARGV[0]
 cache_path = ARGV[1]
 
-puts "Installing Ruby"
+puts "Installing Dotnet"
+
+system("apt-get install libunwind gettext")
 
 puts("#{build_path}/vendor")
 system('mkdir', '-p', "#{build_path}/vendor")
