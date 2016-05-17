@@ -7,17 +7,14 @@ $stdout.sync = true
 build_path = ARGV[0]
 cache_path = ARGV[1]
 
-install_dotnet
+puts "Installing Ruby"
+
+system('mkdir', '-p', "#{build_path}/vendor")
+system('curl', '-sSL', 'https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh', '|', 'bash', '/dev/stdin', '--version', '1.0.0-preview1-002702', '--install-dir', "#{build_path}/vendor/dotnet")
 
 Dir.chdir(build_path)
+puts "Restoring packages"
 system("#{build_path}/vendor/dotnet/dotnet restore")
+
+puts "Building"
 system("#{build_path}/vendor/dotnet/dotnet build")
-
-private
-
-def install_dotnet
-  puts "Installing Ruby"
-
-  system('mkdir', '-p', "#{build_path}/vendor")
-  system('curl', '-sSL', 'https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh', '|', 'bash', '/dev/stdin', '--version', '1.0.0-preview1-002702', '--install-dir', "#{build_path}/vendor/dotnet")
-end
