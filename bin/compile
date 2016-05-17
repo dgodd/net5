@@ -9,22 +9,22 @@ cache_path=$1
 echo "Installing Dotnet"
 
 echo "Install libunwind && libgettextpo"
-cp /tmp/buildpacks/*/ldconfig_wrapper.sh $build_path/
-mkdir -p $build_path/vendor/libunwind
-pushd $build_path/vendor/libunwind
+cp /tmp/buildpacks/*/ldconfig_wrapper.sh $cache_path/
+mkdir -p $cache_path/vendor/libunwind
+pushd $cache_path/vendor/libunwind
   tar zxvf /tmp/buildpacks/*/libunwind.tgz
 popd
 
-mkdir -p $build_path/vendor/libgettextpo
-pushd $build_path/vendor/libgettextpo
+mkdir -p $cache_path/vendor/libgettextpo
+pushd $cache_path/vendor/libgettextpo
   tar zxvf /tmp/buildpacks/*/libgettextpo.tgz
 end
 
-cd $build_path
-export HOME=$build_path
+cd $cache_path
+export HOME=$cache_path
 source ./ldconfig_wrapper.sh
 
-curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir $build_path/vendor/dotnet
+curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir $cache_path/vendor/dotnet
 
 echo "Restoring packages"
 ./vendor/dotnet/dotnet restore
