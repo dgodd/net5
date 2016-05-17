@@ -3,8 +3,10 @@
 require 'yaml'
 
 puts YAML.dump({
-  'config_vars' => {},
+  'config_vars' => {
+    'Hosting:Environment' => 'Production'
+  },
   'default_process_types' => {
-    'web' => 'bash -c "export HOME=`pwd` && export LD_LIBRARY_PATH=$HOME/vendor/libunwind:$HOME/vendor/libgettextpo && $HOME/vendor/dotnet/dotnet run"'
+    'web' => 'bash -c "export HOME=`pwd` && export LD_LIBRARY_PATH=$HOME/vendor/libunwind:$HOME/vendor/libgettextpo && $HOME/vendor/dotnet/dotnet run --server.urls http://0.0.0.0:${PORT}"'
   }
 })
