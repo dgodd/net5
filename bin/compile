@@ -9,7 +9,9 @@ cache_path = ARGV[1]
 
 puts "Installing Ruby"
 
+puts('mkdir', '-p', "#{build_path}/vendor")
 system('mkdir', '-p', "#{build_path}/vendor")
+puts('curl', '-sSL', 'https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh', '|', 'bash', '/dev/stdin', '--version', '1.0.0-preview1-002702', '--install-dir', "#{build_path}/vendor/dotnet")
 system('curl', '-sSL', 'https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh', '|', 'bash', '/dev/stdin', '--version', '1.0.0-preview1-002702', '--install-dir', "#{build_path}/vendor/dotnet")
 
 Dir.chdir(build_path)
