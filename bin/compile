@@ -9,23 +9,22 @@ cache_path = ARGV[1]
 
 puts "Installing Ruby"
 
-puts('mkdir', '-p', "#{build_path}/vendor")
+puts("#{build_path}/vendor")
 system('mkdir', '-p', "#{build_path}/vendor")
-puts('curl', '-sSL', 'https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh', '|', 'bash', '/dev/stdin', '--version', '1.0.0-preview1-002702', '--install-dir', "#{build_path}/vendor_dotnet")
-system('curl', '-sSL', 'https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh', '|', 'bash', '/dev/stdin', '--version', '1.0.0-preview1-002702', '--install-dir', "#{build_path}/vendor_dotnet")
+system("curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir #{build_path}/vendor/dotnet")
 
 Dir.chdir(build_path)
 puts "Restoring packages"
-system("#{build_path}/vendor_dotnet/dotnet restore")
+system("#{build_path}/vendor/dotnet/dotnet restore")
 
 puts "Building"
-system("#{build_path}/vendor_dotnet/dotnet build")
+system("#{build_path}/vendor/dotnet/dotnet build")
 
 puts "Publishing"
-system("#{build_path}/vendor_dotnet/dotnet publish")
+system("#{build_path}/vendor/dotnet/dotnet publish")
 
 puts "Directory Tree"
 puts "BuildPath: #{build_path}"
 system("find #{build_path}")
 puts "Directory Tree Vendor"
-system("find #{build_path}/vendor_dotnet")
+system("find #{build_path}/vendor/dotnet")
