@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # vi:syntax=ruby
+require 'yaml'
 
 build_path = ARGV[0]
 
