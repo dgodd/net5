@@ -2,11 +2,9 @@
 # vi:syntax=ruby
 require 'yaml'
 
-build_path = ARGV[0]
-
 puts YAML.dump({
   'config_vars' => {},
   'default_process_types' => {
-    'web' => "bash -c 'export HOME=#{build_path} && export LD_LIBRARY_PATH=#{build_path}/vendor/libunwind:#{build_path}/vendor/libgettextpo && #{build_path}/vendor/dotnet/dotnet run'"
+    'web' => 'bash -c "export HOME=`pwd` && export LD_LIBRARY_PATH=$HOME/vendor/libunwind:$HOME/vendor/libgettextpo && $HOME/vendor/dotnet/dotnet run"'
   }
 })
