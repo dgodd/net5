@@ -21,7 +21,7 @@ puts "Installing Dotnet"
 
 puts "Install libunwind"
 system("pwd")
-system("find . -name libunwind8.tgz")
+system("find / -name libunwind8.tgz")
 system("mv libunwind8.tgz #{build_path}/libunwind8.tgz")
 Dir.chdir("/") do
   puts("tar zxvf #{build_path}/libunwind8.tgz")
