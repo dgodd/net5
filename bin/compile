@@ -9,7 +9,21 @@ cache_path = ARGV[1]
 
 puts "Installing Dotnet"
 
-system("sudo apt-get install libunwind gettext")
+# system("sudo apt-get install libunwind gettext")
+# puts "Install libunwind")
+# system("curl -LO http://download.savannah.gnu.org/releases/libunwind/libunwind-1.1.tar.gz")
+# system("tar zxvf libunwind-1.1.tar.gz")
+# Dir.chdir("libunwind-1.1") do
+#   system("./configure --prefix=#{build_path}/vendor/libunwind")
+#   system("make")
+#   system("make install")
+# end
+
+puts "Install libunwind")
+system("curl -LO http://mirrors.kernel.org/ubuntu/pool/main/libu/libunwind/libunwind8_1.1-2.2ubuntu3_amd64.deb")
+system("dpkg -i libunwind8_1.1-2.2ubuntu3_amd64.deb")
+system("curl -LO http://mirrors.kernel.org/ubuntu/pool/main/libu/libunwind/libunwind8-dev_1.1-2.2ubuntu3_amd64.deb")
+system("dpkg -i libunwind8-dev_1.1-2.2ubuntu3_amd64.deb")
 
 puts("#{build_path}/vendor")
 system('mkdir', '-p', "#{build_path}/vendor")
