@@ -1,9 +1,4 @@
-if ! [ -x "$(command -v ldconfig)" ]; then
-  LDCONFIG_COMMAND="/sbin/ldconfig"
-else
-  LDCONFIG_COMMAND="$(command -v ldconfig)"
-fi
-
+LDCONFIG_COMMAND="/sbin/ldconfig"
 LDCONFIG_DIR=~/ldconfig
 LDCONFIG_SCRIPT=$LDCONFIG_DIR/ldconfig
 
