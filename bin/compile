@@ -24,6 +24,7 @@ cd $cache_path
 export HOME=$cache_path
 cp /tmp/buildpacks/*/ldconfig_wrapper.sh $cache_path/
 source ./ldconfig_wrapper.sh
+cat ~/ldconfig/ld.so.conf
 
 # curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir $cache_path/vendor/dotnet
 
