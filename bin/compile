@@ -9,26 +9,15 @@ cache_path = ARGV[1]
 
 puts "Installing Dotnet"
 
-# system("sudo apt-get install libunwind gettext")
-# puts "Install libunwind"
-# system("curl -LO http://download.savannah.gnu.org/releases/libunwind/libunwind-1.1.tar.gz")
-# system("tar zxvf libunwind-1.1.tar.gz")
-# Dir.chdir("libunwind-1.1") do
-#   system("./configure --prefix=#{build_path}/vendor/libunwind")
-#   system("make")
-#   system("make install")
-# end
-
-puts "Install libunwind"
+puts "Install libunwind && libgettextpo"
 system("cp /tmp/buildpacks/*/ldconfig_wrapper.sh #{build_path}/")
-# system("mv /tmp/buildpacks/*/libunwind8.tgz #{build_path}/libunwind8.tgz")
 system("mkdir -p #{build_path}/vendor/libunwind")
 Dir.chdir("#{build_path}/vendor/libunwind") do
-  # system("tar zxvf /tmp/buildpacks/*/libunwind8.tgz")
   system("tar zxvf /tmp/buildpacks/*/libunwind.tgz")
-  # system("cp /etc/ld.so.conf #{build_path}/ld.so.conf")
-  # system("echo '#{build_path}/vendor/libunwind' >> #{build_path}/ld.so.conf")
-  # system("/sbin/ldconfig -f #{build_path}/ld.so.conf")
+end
+system("mkdir -p #{build_path}/vendor/libgettextpo")
+Dir.chdir("#{build_path}/vendor/libgettextpo") do
+  system("tar zxvf /tmp/buildpacks/*/libgettextpo.tgz")
 end
 
 puts("#{build_path}/vendor")

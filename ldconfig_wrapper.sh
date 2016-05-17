@@ -15,6 +15,6 @@ export PATH=$LDCONFIG_DIR:$PATH
 
 cp /etc/ld.so.conf $LDCONFIG_DIR
 echo "$HOME/vendor/libunwind/">> $LDCONFIG_DIR/ld.so.conf
-# echo "$HOME/vendor/gettext/">> $LDCONFIG_DIR/ld.so.conf
+echo "$HOME/vendor/libgettextpo/">> $LDCONFIG_DIR/ld.so.conf
 ldconfig -f $LDCONFIG_DIR/ld.so.conf
 
