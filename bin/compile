@@ -18,3 +18,9 @@ system("#{build_path}/vendor/dotnet/dotnet restore")
 
 puts "Building"
 system("#{build_path}/vendor/dotnet/dotnet build")
+
+puts "Publishing"
+system("#{build_path}/vendor/dotnet/dotnet publish")
+
+puts "Directory Tree"
+system("find #{build_path}")
