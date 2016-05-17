@@ -20,12 +20,10 @@ puts "Installing Dotnet"
 # end
 
 puts "Install libunwind"
-packpath = ENV['PWD']
-system("pwd")
-system("find .")
+system("mv libunwind8.tgz #{build_path}/libunwind8.tgz")
 Dir.chdir("/") do
-  puts("tar zxvf #{packpath}/libunwind8.tgz")
-  system("tar zxvf #{packpath}/libunwind8.tgz")
+  puts("tar zxvf #{build_path}/libunwind8.tgz")
+  system("tar zxvf #{build_path}/libunwind8.tgz")
 end
 
 puts("#{build_path}/vendor")
