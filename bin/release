@@ -8,6 +8,6 @@ build_path = '/tmp/app'
 puts YAML.dump({
   'config_vars' => {},
   'default_process_types' => {
-    'web' => "bash -c 'export HOME=#{build_path} ; source #{build_path}/ldconfig_wrapper.sh ; #{build_path}/vendor/dotnet/dotnet run'"
+    'web' => "bash -c 'export HOME=#{build_path} && source #{build_path}/ldconfig_wrapper.sh && #{build_path}/vendor/dotnet/dotnet run'"
   }
 })
