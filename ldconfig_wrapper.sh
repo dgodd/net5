@@ -13,3 +13,5 @@ echo "$HOME/vendor/libunwind">> $LDCONFIG_DIR/ld.so.conf
 echo "$HOME/vendor/libgettextpo">> $LDCONFIG_DIR/ld.so.conf
 ldconfig -f $LDCONFIG_DIR/ld.so.conf
 
+export LD_LIBRARY_PATH=$HOME/vendor/libunwind:$HOME/vendor/libgettextpo
+

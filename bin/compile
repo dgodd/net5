@@ -27,9 +27,9 @@ echo "Unzip vendor"
 tar zxf /tmp/buildpacks/*/vendor.tgz
 
 echo "Setup ldconfig"
-cp /tmp/buildpacks/*/ldconfig_wrapper.sh $cache_path/
-source ./ldconfig_wrapper.sh
-export LD_LIBRARY_PATH=/tmp/app/vendor/libunwind:/tmp/app/vendor/libgettextpo
+#cp /tmp/buildpacks/*/ldconfig_wrapper.sh $cache_path/
+#source ./ldconfig_wrapper.sh
+export LD_LIBRARY_PATH=$HOME/vendor/libunwind:$HOME/vendor/libgettextpo
 /usr/bin/ldd ./vendor/dotnet/dotnet
 /usr/bin/ldd ./vendor/dotnet/shared/Microsoft.NETCore.App/1.0.0-rc2-3002702/libcoreclr.so
 
