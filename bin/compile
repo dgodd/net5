@@ -8,32 +8,17 @@ cache_path=$1
 
 echo "Installing Dotnet"
 
-# echo "Install libunwind && libgettextpo"
-# cp /tmp/buildpacks/*/ldconfig_wrapper.sh $cache_path/
-# mkdir -p $cache_path/vendor/libunwind
-# pushd $cache_path/vendor/libunwind
-#   tar zxvf /tmp/buildpacks/*/libunwind.tgz
-# popd
-
-# mkdir -p $cache_path/vendor/libgettextpo
-# pushd $cache_path/vendor/libgettextpo
-#   tar zxvf /tmp/buildpacks/*/libgettextpo.tgz
-# popd
-
 cd $cache_path
 export HOME=$cache_path
 
 echo "Unzip vendor"
 tar zxf /tmp/buildpacks/*/vendor.tgz
+# apt-get install libunwind8 libunwind8-dev gettext
+# MAYBE; apt-get install libicu-dev
+# curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir $cache_path/vendor/dotnet
 
 echo "Setup ldconfig"
-#cp /tmp/buildpacks/*/ldconfig_wrapper.sh $cache_path/
-#source ./ldconfig_wrapper.sh
 export LD_LIBRARY_PATH=$HOME/vendor/libunwind:$HOME/vendor/libgettextpo
-/usr/bin/ldd ./vendor/dotnet/dotnet
-/usr/bin/ldd ./vendor/dotnet/shared/Microsoft.NETCore.App/1.0.0-rc2-3002702/libcoreclr.so
-
-# curl -sSk https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview1-002702 --install-dir $cache_path/vendor/dotnet
 
 echo "Restoring packages"
 ./vendor/dotnet/dotnet restore
